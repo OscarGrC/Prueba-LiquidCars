@@ -5,7 +5,7 @@ import { environment } from '../../environment';
 import { IExpediente, IExpedienteResponse } from '../interfaces/IExpediente';
 import { IFichero } from '../interfaces/IFichero';
 import { IEstadoDoc } from '../interfaces/IEstadoDoc';
-import { ICuota } from '../interfaces/ICuota';
+import { ICuotaInput } from '../interfaces/ICuotaInput';
 
 @Injectable({
   providedIn: 'root'
@@ -54,21 +54,28 @@ export class ExpedienteService {
   }
 
   // Obtener fichero
-  getFichero(id: string): Observable<IFichero> {
+  getFichero(id: string): Observable<IFichero[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<IFichero>(`${environment.BASE_URL}/externalClient/v1/dpm/records/${id}/documents`, { headers });
+    return this.http.get<IFichero[]>(`${environment.BASE_URL}/externalClient/v1/dpm/records/${id}/documents`, { headers });
   }
 
   // Obtener estado del documento
   getEstadoDoc(id: string): Observable<IEstadoDoc> {
     const headers = this.getAuthHeaders();
-    return this.http.get<IEstadoDoc>(`${environment.BASE_URL}/externalClient/v1/dpm/records/${id}/status`, { headers });
+    return this.http.get<IEstadoDoc>(`${environment.BASE_URL}/externalClient/v1/dpm/records/documents/${id}/status`, { headers });
   }
 
   // Obtener cuota
-  getCuota(id: string): Observable<ICuota> {
+  getCuota(id: string): Observable<ICuotaInput[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<ICuota>(`${environment.BASE_URL}/externalClient/v1/tenants/features/usage`, { headers });
+    return this.http.get<ICuotaInput[]>(`${environment.BASE_URL}/externalClient/v1/tenants/features/usage`, { headers });
+  }
+  // Subir archivo 
+  uploadFile(documentId: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    const headers = this.getAuthHeaders();
+    return this.http.post<any>(`${environment.BASE_URL}/externalClient/v1/dpm/records/documents/${documentId}/file`, formData, { headers });
   }
 
   private getCookie(name: string): string | null {
