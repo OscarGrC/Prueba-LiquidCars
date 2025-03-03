@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,12 +17,13 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         console.log('Login failed:', error);
