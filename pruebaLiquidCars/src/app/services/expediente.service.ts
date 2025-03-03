@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environment';
-import { IExpediente } from '../interfaces/IExpediente';
+import { IExpediente, IExpedienteResponse } from '../interfaces/IExpediente';
 import { IFichero } from '../interfaces/IFichero';
 import { IEstadoDoc } from '../interfaces/IEstadoDoc';
 import { ICuota } from '../interfaces/ICuota';
@@ -36,10 +36,21 @@ export class ExpedienteService {
   }
 
   // Buscar expediente
-  getExpediente(id: string): Observable<any> {
+  getExpediente(id: string): Observable<IExpedienteResponse> {
     const headers = this.getAuthHeaders();
-    return this.http.get<IExpediente>(`${environment.BASE_URL}/externalClient/v1/dpm/records/search`, { headers });
+    const body = {
+      textSearch: id,
+      engagement: null,
+      creation: null,
+      lastUpdate: null,
+      closure: null,
+      statuses: null,
+      processTypes: null,
+      visibility: null,
+      sortBy: "DT_ENGAGEMENT_ASC"
+    };
 
+    return this.http.post<IExpedienteResponse>(`${environment.BASE_URL}/externalClient/v1/dpm/records/search`, body, { headers });
   }
 
   // Obtener fichero
