@@ -21,8 +21,14 @@ export class WebSocketService {
       url: this.socketUrl,
       deserializer: (msg) => msg.data,
     });
+    /*
+    17	asimovguy@gmail.com	Candidate_asimovguy@gmail.com_1		
+    18	asimovguy@gmail.com	Candidate_asimovguy@gmail.com_2		
+    19	asimovguy@gmail.com	Candidate_asimovguy@gmail.com_3		
+    20	asimovguy@gmail.com	Candidate_asimovguy@gmail.com_4		
+    21	asimovguy@gmail.com	Candidate_asimovguy@gmail.com_5*/
     const connectMessage = {
-      userId: this.getCookie("JSESSIONID"),
+      userId: 17, //esto va con otro id 
       messageType: "Connect",
       properties: { locale: locale }
     };
@@ -42,10 +48,5 @@ export class WebSocketService {
   disconnect(): void {
     this.socket$.complete();
   }
-  private getCookie(name: string): string | null {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
-    return null;
-  }
+
 }

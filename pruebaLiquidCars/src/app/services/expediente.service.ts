@@ -14,7 +14,6 @@ export class ExpedienteService {
 
   constructor(private http: HttpClient) { }
 
-
   private getAuthHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('accessToken');
     const userToken = localStorage.getItem('userToken') || "invalid";
@@ -29,13 +28,12 @@ export class ExpedienteService {
     }
     return headers;
   }
-  // Obtener mis datos
+
   getMyData(): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get<any>(`${environment.BASE_URL}/externalClient/v1/dpm/users/me`, { headers });
   }
 
-  // Buscar expediente
   getExpediente(id: string): Observable<IExpedienteResponse> {
     const headers = this.getAuthHeaders();
     const body = {
@@ -53,24 +51,21 @@ export class ExpedienteService {
     return this.http.post<IExpedienteResponse>(`${environment.BASE_URL}/externalClient/v1/dpm/records/search`, body, { headers });
   }
 
-  // Obtener fichero
   getFichero(id: string): Observable<IFichero[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<IFichero[]>(`${environment.BASE_URL}/externalClient/v1/dpm/records/${id}/documents`, { headers });
   }
 
-  // Obtener estado del documento
   getEstadoDoc(id: string): Observable<IEstadoDoc> {
     const headers = this.getAuthHeaders();
     return this.http.get<IEstadoDoc>(`${environment.BASE_URL}/externalClient/v1/dpm/records/documents/${id}/status`, { headers });
   }
 
-  // Obtener cuota
   getCuota(id: string): Observable<ICuotaInput[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<ICuotaInput[]>(`${environment.BASE_URL}/externalClient/v1/tenants/features/usage`, { headers });
   }
-  // Subir archivo 
+
   uploadFile(documentId: string, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file, file.name);
