@@ -1,0 +1,10 @@
+{
+    "/api": {
+        "target": "https://be-dev-eu.lawyerty.es",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}

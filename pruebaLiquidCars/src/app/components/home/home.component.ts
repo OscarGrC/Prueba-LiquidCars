@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     secondPayment: { amount: 0, currency: '', },
     simulationScenario: '',
   };
-
   fichero: IFichero = {
     id: '', lcVarId: '', object_type: '', recordId: '', status: '', tenantId: '', type: '', userIndication: '',
     valid: false, documentVersion: 0, requested: '', participantOwnerId: '',
@@ -265,6 +264,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getEstadoDocData(): void {
     this.expedienteService.getEstadoDoc('f2c4f4c6-1116-4ab3-b1c4-151841ec532a').subscribe({
       next: (data) => {
+        this.estadoDoc = data
       },
       error: (err) => {
         console.log('Error al obtener estado documento:', err);
@@ -275,29 +275,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getCuotaData(): void {
     this.expedienteService.getCuota('RECORD01').subscribe({
       next: (data) => {
-        const newCuota: ICuota = {
-          tenantId: data[0].tenantId,
-          customStorage: data[0],
-          recordCommunications: data[1],
-          recordCreate: data[2],
-          adminCreateClient: data[3],
-          adminCreateLawyer: data[4],
-          adminCreateAdmin: data[5],
-          customProcesses: data[6],
-          customTemplates: data[7],
-          customDocTypes: data[8],
-          adminCreateUser: data[9],
-          recordDocs: data[10],
-          recordView: data[11],
-          customEmail: data[12],
-          customEmailGooglEmail: data[13],
-          customStorageGoogleDrive: data[14],
-          recordActivities: data[15],
-          recordLDPS: data[16],
-          recordLog: data[17]
-        };
-        this.cuota = newCuota;
-
+        this.cuota = this.parseCuotaData(data);
       },
       error: (err) => {
         console.log('Error al obtener cuota:', err);
@@ -332,4 +310,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
+  private parseCuotaData(data: any[]): ICuota {
+    return {
+      tenantId: data[0].tenantId,
+      customStorage: data[0],
+      recordCommunications: data[1],
+      recordCreate: data[2],
+      adminCreateClient: data[3],
+      adminCreateLawyer: data[4],
+      adminCreateAdmin: data[5],
+      customProcesses: data[6],
+      customTemplates: data[7],
+      customDocTypes: data[8],
+      adminCreateUser: data[9],
+      recordDocs: data[10],
+      recordView: data[11],
+      customEmail: data[12],
+      customEmailGooglEmail: data[13],
+      customStorageGoogleDrive: data[14],
+      recordActivities: data[15],
+      recordLDPS: data[16],
+      recordLog: data[17]
+    }
+  }
 }

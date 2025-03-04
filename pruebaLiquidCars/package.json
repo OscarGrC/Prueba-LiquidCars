@@ -18,11 +18,16 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "prueba-liquid-cars": "file:",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uuid": "^11.1.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^17.0.2",
     "@angular-devkit/build-angular": "^17.3.10",
     "@angular/cli": "^17.3.10",
     "@angular/compiler-cli": "^17.3.0",

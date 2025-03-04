@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { Observable } from 'rxjs';
+import { IWebSocketService } from '../interfaces/IWebsocketService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebSocketService {
+export class WebSocketService implements IWebSocketService {
 
   private socket$!: WebSocketSubject<any>;
   private socketUrl: string = 'lc-ws';
