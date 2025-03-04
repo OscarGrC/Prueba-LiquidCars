@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environment';
-import { IExpediente, IExpedienteResponse } from '../interfaces/IExpediente';
+import { IExpedienteResponse } from '../interfaces/IExpediente';
 import { IFichero } from '../interfaces/IFichero';
 import { IEstadoDoc } from '../interfaces/IEstadoDoc';
 import { ICuotaInput } from '../interfaces/ICuotaInput';
+import { IExpedienteService } from '../interfaces/IExpedienteService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExpedienteService {
+export class ExpedienteService implements IExpedienteService {
 
   constructor(private http: HttpClient) { }
 

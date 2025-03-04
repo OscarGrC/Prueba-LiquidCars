@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environment';
-import { IAuthResponse } from '../interfaces/IauthResponse';
+import { IAuthResponse } from '../interfaces/IAuthResponse';
+import { IAuthService } from '../interfaces/IAuthService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements IAuthService {
 
   private url = `${environment.BASE_URL}/api/v1//security/login-direct/${environment.OAUTH_CLIENT_ID}`;
 
