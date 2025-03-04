@@ -12,14 +12,19 @@ export class AuthService {
   private url = `${environment.BASE_URL}/api/v1//security/login-direct/${environment.OAUTH_CLIENT_ID}`;
 
   constructor(private http: HttpClient) { }
-
+  /**
+  * Maneja el proceso de inicio de sesión del usuario.
+  * 
+  * @param {string} email - El correo electrónico del usuario.
+  * @param {string} password - La contraseña del usuario.
+  * @returns {Observable<IAuthResponse>} Un observable que contiene la respuesta de autenticación.
+  * 
+  * @nota Actualmente, el JSESSIONID está hardcodeado en lugar de ser pasado dinámicamente. 
+  *       Esto debe revisarse en el futuro para gestionar correctamente las sesiones.
+  */
   login(email: string, password: string): Observable<IAuthResponse> {
-    // Crear la cookie 
     const jsessionId = "94e07058-2239-4626-ba5d-0b88b975f280";
-    // Crear la cookie JSESSIONID antes de enviar la solicitud
     document.cookie = `JSESSIONID=${jsessionId}; path=/; Secure; SameSite=None;`;
-
-    // headers
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Cookie': `JSESSIONID=${this.getCookie('JSESSIONID')}`
@@ -33,7 +38,6 @@ export class AuthService {
     );
   }
 
-  // Función para obtener el valor de una cookie
   private getCookie(name: string): string | null {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
