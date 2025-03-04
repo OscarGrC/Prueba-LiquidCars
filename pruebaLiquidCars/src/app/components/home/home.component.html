@@ -1,1 +1,54 @@
-<p>home works!</p>
+<div class="expediente">
+    <h2 class="expediente__title">Expediente ID: {{ expediente.recordId }}</h2>
+    <p class="expediente__line">Estado: {{ expediente.status }}</p>
+    <p class="expediente__line">Tipo de Proceso: {{ expediente.processType }}</p>
+    <p class="expediente__line">Fecha de Creación: {{ expediente.creation }}</p>
+    <p class="expediente__line">Última Actualización: {{ expediente.lastUpdate }}</p>
+    <p class="expediente__line">Tenant ID: {{ expediente.tenantId }}</p>
+    <p class="expediente__line">Workflow ID: {{ expediente.workflowExternalId }}</p>
+</div>
+
+<div class="cliente">
+    <h3 class="cliente__title">Cliente</h3>
+    <p class="cliente__line">Nombre: {{ expediente.client?.name }}</p>
+    <p class="cliente__line">Tipo: {{ expediente.client?.type }}</p>
+    <p class="cliente__line">País: {{ expediente.client?.countryId }}</p>
+</div>
+
+<div class="abogado">
+    <h3 class="abogado__title">Abogado</h3>
+    <p class="abogado__line">Nombre: {{ expediente.lawyer?.name }}</p>
+    <p class="abogado__line">Tipo: {{ expediente.lawyer?.type }}</p>
+    <p class="abogado__line">Idioma: {{ expediente.lawyer?.defaultLanguage }}</p>
+</div>
+
+<div class="fichero">
+    <h3 class="fichero__title">Fichero</h3>
+    <p class="fichero__line">Nombre: {{ fichero.id }}</p>
+    <p class="fichero__line">Tipo: {{ fichero.object_type }}</p>
+    <input class="fichero__input" type="file" (change)="onFileSelected($event)" accept=".pdf,.docx,.txt" />
+    <p *ngIf="fileError" class="fichero__error">El archivo debe ser de tipo PDF, DOCX o TXT.</p>
+    <button class="fichero__button" (click)="uploadSelectedFile()" [disabled]="!selectedFile">Enviar</button>
+</div>
+
+<div class="estado-doc">
+    <h3 class="estado-doc__title">Estado del Documento</h3>
+    <p class="estado-doc__line">Estado: {{ estadoDoc.data }}</p>
+</div>
+
+<div class="cuota">
+    <h3 class="cuota__title">Detalles de la Cuota</h3>
+    <p class="cuota__line"><strong>Tenant ID:</strong> {{ cuota.tenantId }}</p>
+    <div>
+        <strong>Almacenamiento Personalizado:</strong>
+        <p class="cuota__line">Habilitado: {{ cuota.customStorage.enabled ? 'Sí' : 'No' }}</p>
+        <p class="cuota__line">Máximo Permitido: {{ cuota.customStorage.maxCount }}</p>
+        <p class="cuota__line">Uso Actual: {{ cuota.customStorage.currentCount }}</p>
+    </div>
+    <div>
+        <strong>Documentos Registrados:</strong>
+        <p class="cuota__line">Habilitado: {{ cuota.recordDocs.enabled ? 'Sí' : 'No' }}</p>
+        <p class="cuota__line">Máximo Permitido: {{ cuota.recordDocs.maxCount }}</p>
+        <p class="cuota__line">Uso Actual: {{ cuota.recordDocs.currentCount }}</p>
+    </div>
+</div>

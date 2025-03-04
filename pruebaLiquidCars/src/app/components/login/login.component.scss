@@ -1,47 +1,52 @@
-.login-container {
+.login {
     width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
+    max-width: 25rem;
+    margin: 3.125rem auto;
+    padding: 1.25rem;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 
-    h2 {
+    &__title {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
-    .form-group {
-        margin-bottom: 15px;
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
 
-        label {
+    &__form-group {
+        margin-bottom: 0.9375rem;
+
+        .login__label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 0.3125rem;
         }
 
-        input {
+        .login__input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 0.625rem;
+            border: 0.0625rem solid #ccc;
+            border-radius: 0.25rem;
+            font-size: 1rem;
         }
 
-        .error {
+        .login__error {
             color: red;
-            font-size: 12px;
+            font-size: 0.75rem;
         }
     }
 
-    button {
+    &__button {
         width: 100%;
-        padding: 10px;
+        padding: 0.625rem;
         background-color: #4caf50;
         color: white;
         border: none;
-        border-radius: 4px;
-        font-size: 16px;
+        border-radius: 0.25rem;
+        font-size: 1rem;
         cursor: pointer;
 
         &:disabled {

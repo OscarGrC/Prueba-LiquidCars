@@ -1,24 +1,24 @@
-<div class="login-container">
-    <h2>Login</h2>
-    <form (ngSubmit)="login()" #loginForm="ngForm">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" required #emailInput="ngModel"
-                placeholder="Enter your email" />
-            <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+<div class="login">
+    <h2 class="login__title">Login</h2>
+    <form class="login__form" (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="login__form-group">
+            <label class="login__label" for="email">Email:</label>
+            <input class="login__input" type="email" id="email" name="email" [(ngModel)]="email" required
+                #emailInput="ngModel" placeholder="Enter your email" />
+            <div class="login__error" *ngIf="emailInput.invalid && emailInput.touched">
                 Please enter a valid email.
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" required
+        <div class="login__form-group">
+            <label class="login__label" for="password">Password:</label>
+            <input class="login__input" type="password" id="password" name="password" [(ngModel)]="password" required
                 #passwordInput="ngModel" placeholder="Enter your password" />
-            <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+            <div class="login__error" *ngIf="passwordInput.invalid && passwordInput.touched">
                 Please enter your password.
             </div>
         </div>
 
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        <button class="login__button" type="submit" [disabled]="loginForm.invalid">Login</button>
     </form>
 </div>
